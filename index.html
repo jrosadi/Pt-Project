@@ -13,24 +13,27 @@
             margin-top:10px;
             margin-bottom:10px;
         }
+
+        body {
+            font-family: sans-serif;
+            background-color:mediumseagreen ;
+        }
     </style>
 </head>
-<body style="background-color:MediumSeaGreen">
+<body>
     <h1 class="center">Grocery List</h1>
-    <p class="center">Put in groceries into form</p>
+    <p class="center">Enter groceries</p>
 
     <!--from w3 schools    -->
     <form class="center">
         <label for="grocery-name-input">Grocery Name:</label><br>
-        <input class="my-20" type="text" id="grocery-name-input" name="grocery-name-input"><br>
+        <input class="my-20" type="text" id="grocery-name-input" name="grocery-name-input" placeholder="Enter grocery"><br>
 
         <input onclick="formSubmitted()" type="button" value="Add To List">
     </form>
 
     <!--from w3 schools    -->
     <form class="center my-20" id="checkbox-container">
-        <input class="my-20" type="checkbox" id="apples" name="checklist" value="apples">
-        <label for="apples">Apples</label><br>
         <input onclick="validate()" type="button" value="Update" id="update-checklist">
     </form>
 
