@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+
+    <style>
+        .center {
+            text-align:center;
+        }
+
+        .my-20 {
+            margin-top:10px;
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body style="background-color:MediumSeaGreen">
+    <h1 class="center">Grocery List</h1>
+    <p class="center">Put in groceries into form</p>
+
+    <!--from w3 schools    -->
+    <form class="center">
+        <label for="grocery-name-input">Grocery Name:</label><br>
+        <input class="my-20" type="text" id="grocery-name-input" name="grocery-name-input"><br>
+
+        <input onclick="formSubmitted()" type="button" value="Add To List">
+    </form>
+
+    <!--from w3 schools    -->
+    <form class="center my-20" id="checkbox-container">
+        <input class="my-20" type="checkbox" id="apples" name="checklist" value="apples">
+        <label for="apples">Apples</label><br>
+        <input onclick="validate()" type="button" value="Update" id="update-checklist">
+    </form>
+
+    <script src="grocery-list.js"></script>
+</body>
+</html>
