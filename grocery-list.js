@@ -1,16 +1,37 @@
 let container = document.getElementById("checkbox-container");
+let checkboxes = document.getElementsByName("checklist");
 
 function init(){
-
     container.innerHTML = localStorage.getItem("checkboxes");
+
+    checkListEmpty();
 }
  
 init();
 
 //get text from form on submit pressed
 function formSubmitted(){
-    let form = document.getElementById("grocery-name-input");
+    let form = document.getElementById("grocery-input");
     let formText = form.value;
+
+
+    //check if nothing has been put in
+    if(formText == ""){
+        alert("Please enter a grocery item into the form!"); 
+        return;
+    }
+
+    //have to use regular for because foreach can't be broken
+    let checkboxesArray = Array.from(checkboxes);
+
+    for(let i = 0; i < checkboxesArray.length; i++){
+        let element = checkboxesArray[i];
+
+        if(document.getElementById(element.id + "label").textContent == formText){
+            alert("Grocery Item " + formText + " is already included");
+            return;
+        }
+    }
 
     let checkbox = document.createElement('input');
 
@@ -32,11 +53,11 @@ function formSubmitted(){
     container.insertBefore(br, document.getElementById("update-checklist"));
 
     localStorage.setItem("checkboxes", container.innerHTML);
+
+    checkListEmpty();
 }
 
-function validate(){
-    let checkboxes = document.getElementsByName("checklist");
-        
+function validate(){        
     let checkedItems = [];
     checkboxes.forEach(item => {
         if (item.checked){
@@ -54,7 +75,20 @@ function validate(){
 
     //update localstorage
     localStorage.setItem("checkboxes", container.innerHTML);
+    
+    checkListEmpty();
 }
 
+function checkListEmpty(){
+    if(checkboxes.length == 0){
+        document.getElementById("grocery-list-title").innerHTML = "No Groceries In List";
+
+        document.getElementById("update-checklist").style.visibility = "hidden";
+    } else {
+        document.getElementById("grocery-list-title").innerHTML = "Grocery List:";
+
+        document.getElementById("update-checklist").style.visibility = "visible";
+    }
+}
 
 

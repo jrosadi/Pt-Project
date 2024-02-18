@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shopping List</title>
+    <title>Grocery List Maker</title>
 
     <style>
         .center {
@@ -14,6 +14,10 @@
             margin-bottom:10px;
         }
 
+        .mb-20 {
+            margin-bottom:10px;
+        }
+
         body {
             font-family: sans-serif;
             background-color:mediumseagreen ;
@@ -21,16 +25,30 @@
     </style>
 </head>
 <body>
-    <h1 class="center">Grocery List</h1>
+    <h1 class="center">Grocery List Maker</h1>
     <p class="center">Enter groceries and add them to the list, press the update button to remove checked groceries</p>
 
     <!--from w3 schools    -->
     <form class="center">
-        <input class="my-20" type="text" id="grocery-name-input" name="grocery-name-input" placeholder="Enter grocery"><br>
+        <input class="my-20" type="text" id="grocery-input" name="grocery-input" placeholder="Enter grocery"><br>
+
+        <!-- <label for="categories">Grocery Category: </label>
+
+        <select class="mb-20" name="groceries-input" id="categories">
+            <option value="produce">Produce</option>
+            <option value="dairy">Dairy</option>
+            <option value="meat">Meat</option>
+            <option value="bakery">Bakery</option>
+            <option value="snacks">Snacks</option>
+            <option value="drinks">Drinks</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="other">Other</option>
+        </select> <br> -->
 
         <input onclick="formSubmitted()" type="button" value="Add To List">
     </form>
 
+    <h2 class="center" id="grocery-list-title">Grocery List:</h2>
     <!--from w3 schools    -->
     <form class="center my-20" id="checkbox-container">
         <input onclick="validate()" type="button" value="Update" id="update-checklist">
