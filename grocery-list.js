@@ -1,9 +1,16 @@
+let container = document.getElementById("checkbox-container");
+
+function init(){
+
+    container.innerHTML = localStorage.getItem("checkboxes");
+}
+ 
+init();
+
 //get text from form on submit pressed
 function formSubmitted(){
     let form = document.getElementById("grocery-name-input");
     let formText = form.value;
-
-    let container = document.getElementById("checkbox-container");
 
     let checkbox = document.createElement('input');
 
@@ -12,7 +19,6 @@ function formSubmitted(){
     checkbox.value = "value";
 
     checkbox.id = Date.now();
-
     let label = document.createElement('label');
     label.htmlFor = formText;
     label.textContent = formText;
@@ -24,13 +30,13 @@ function formSubmitted(){
     container.insertBefore(checkbox, document.getElementById("update-checklist"));
     container.insertBefore(label, document.getElementById("update-checklist"));
     container.insertBefore(br, document.getElementById("update-checklist"));
+
+    localStorage.setItem("checkboxes", container.innerHTML);
 }
 
 function validate(){
     let checkboxes = document.getElementsByName("checklist");
-    
-    console.log(checkboxes.length);
-    
+        
     let checkedItems = [];
     checkboxes.forEach(item => {
         if (item.checked){
@@ -38,14 +44,16 @@ function validate(){
         }
     });
 
-    checkedItems.forEach(element => {
-        console.log( document.getElementById(element.id + "label").textContent);
+    checkedItems.forEach(element => {        
         let elementId = element.id;
+        
         element.remove();
         document.getElementById(elementId + "label").remove();
-        document.getElementById(elementId + "br").remove();
-        
+        document.getElementById(elementId + "br").remove(); 
     });
+
+    //update localstorage
+    localStorage.setItem("checkboxes", container.innerHTML);
 }
 
 
