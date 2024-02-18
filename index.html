@@ -26,24 +26,14 @@
 </head>
 <body>
     <h1 class="center">Grocery List Maker</h1>
-    <p class="center">Enter groceries and add them to the list, press the update button to remove checked groceries</p>
+    <p class="center">Enter groceries and add them to the list, press the update button to remove checked groceries.</p>
+    <p class="center">The list is stored in local storage, and is saved even when you refresh the page!</p>
 
     <!--from w3 schools    -->
     <form class="center">
         <input class="my-20" type="text" id="grocery-input" name="grocery-input" placeholder="Enter grocery"><br>
 
-        <!-- <label for="categories">Grocery Category: </label>
-
-        <select class="mb-20" name="groceries-input" id="categories">
-            <option value="produce">Produce</option>
-            <option value="dairy">Dairy</option>
-            <option value="meat">Meat</option>
-            <option value="bakery">Bakery</option>
-            <option value="snacks">Snacks</option>
-            <option value="drinks">Drinks</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="other">Other</option>
-        </select> <br> -->
+        <label for="categories">Grocery Category: </label>
 
         <input onclick="formSubmitted()" type="button" value="Add To List">
     </form>
@@ -51,7 +41,7 @@
     <h2 class="center" id="grocery-list-title">Grocery List:</h2>
     <!--from w3 schools    -->
     <form class="center my-20" id="checkbox-container">
-        <input onclick="validate()" type="button" value="Update" id="update-checklist">
+        <input class="my-20" onclick="validate()" type="button" value="Update" id="update-checklist">
     </form>
 
     <script src="grocery-list.js"></script>

@@ -1,9 +1,12 @@
 let container = document.getElementById("checkbox-container");
 let checkboxes = document.getElementsByName("checklist");
 
+//runs on startup
 function init(){
+    //immediately fetches checkboxes from localstorage 
     container.innerHTML = localStorage.getItem("checkboxes");
 
+    //updates the state of the button and title of the checklist based on if it's empty or not
     checkListEmpty();
 }
  
@@ -14,23 +17,9 @@ function formSubmitted(){
     let form = document.getElementById("grocery-input");
     let formText = form.value;
 
-
-    //check if nothing has been put in
-    if(formText == ""){
-        alert("Please enter a grocery item into the form!"); 
+    //check if the form fails(has duplicates or empty space)
+    if(checkFormText(formText)){
         return;
-    }
-
-    //have to use regular for because foreach can't be broken
-    let checkboxesArray = Array.from(checkboxes);
-
-    for(let i = 0; i < checkboxesArray.length; i++){
-        let element = checkboxesArray[i];
-
-        if(document.getElementById(element.id + "label").textContent == formText){
-            alert("Grocery Item " + formText + " is already included");
-            return;
-        }
     }
 
     let checkbox = document.createElement('input');
@@ -48,16 +37,44 @@ function formSubmitted(){
     let br = document.createElement('br');
     br.id = checkbox.id + "br";
 
+    //inserts the checkbox and components before the button, which is the last child of the container
     container.insertBefore(checkbox, document.getElementById("update-checklist"));
     container.insertBefore(label, document.getElementById("update-checklist"));
     container.insertBefore(br, document.getElementById("update-checklist"));
 
+    //updates the checkboxes key in localstorage with the current innerhtml of the checkbox container
     localStorage.setItem("checkboxes", container.innerHTML);
 
     checkListEmpty();
 }
 
+function checkFormText(formText){
+
+    //check if nothing has been put in
+    if(formText == ""){
+        alert("Please enter a grocery item into the form!"); 
+        return true;
+    }
+
+    //have to use regular for because foreach can't be broken
+    //Check for duplicate grocery items
+    let checkboxesArray = Array.from(checkboxes);
+
+    for(let i = 0; i < checkboxesArray.length; i++){
+        let element = checkboxesArray[i];
+
+        if(document.getElementById(element.id + "label").textContent == formText){
+            alert("Grocery Item " + formText + " is already included");
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function validate(){        
+
+    //loops through all the items in checkboxes and adds the checked ones to checkeditems array
     let checkedItems = [];
     checkboxes.forEach(item => {
         if (item.checked){
@@ -65,6 +82,7 @@ function validate(){
         }
     });
 
+    //remove the elements of checkitems
     checkedItems.forEach(element => {        
         let elementId = element.id;
         
@@ -82,7 +100,7 @@ function validate(){
 function checkListEmpty(){
     if(checkboxes.length == 0){
         document.getElementById("grocery-list-title").innerHTML = "No Groceries In List";
-
+        
         document.getElementById("update-checklist").style.visibility = "hidden";
     } else {
         document.getElementById("grocery-list-title").innerHTML = "Grocery List:";
