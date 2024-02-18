@@ -55,7 +55,8 @@ function formSubmitted(){
 
 //purpose: check if the user has inputted valid text
 //input: formText and checkboxes nodelist as an array
-//output: returns false if the user has inputted something invalid and returns true if they haven't
+//output: returns true if the user has inputted something valid and returns false if they haven't, alerts them if they have inputted
+//something invalid
 function checkFormText(formText){
 
     //check if nothing has been put in
