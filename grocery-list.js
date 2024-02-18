@@ -1,10 +1,10 @@
-let container = document.getElementById("checkbox-container");
+let checkboxContainer = document.getElementById("checkbox-container");
 let checkboxes = document.getElementsByName("checklist");
 
 //runs on startup
 function init(){
     //immediately fetches checkboxes from localstorage 
-    container.innerHTML = localStorage.getItem("checkboxes");
+    checkboxContainer.innerHTML = localStorage.getItem("checkboxes");
 
     //updates the state of the button and title of the checklist based on if it's empty or not
     checkListEmpty();
@@ -23,27 +23,28 @@ function formSubmitted(){
     }
 
     let checkbox = document.createElement('input');
+    let label = document.createElement('label');
+    let br = document.createElement('br');
 
     checkbox.type = "checkbox";
-    checkbox.name = "checklist";
     checkbox.value = "value";
+    checkbox.name = "checklist";
 
-    checkbox.id = Date.now();
-    let label = document.createElement('label');
     label.htmlFor = formText;
     label.textContent = formText;
-    label.id = checkbox.id + "label";
 
-    let br = document.createElement('br');
+    //creates a unique id for the checkbox, label, and br based off of the current time
+    checkbox.id = Date.now();
+    label.id = checkbox.id + "label";
     br.id = checkbox.id + "br";
 
-    //inserts the checkbox and components before the button, which is the last child of the container
-    container.insertBefore(checkbox, document.getElementById("update-checklist"));
-    container.insertBefore(label, document.getElementById("update-checklist"));
-    container.insertBefore(br, document.getElementById("update-checklist"));
+    //inserts the checkbox and components before the button, which is the last child of the checkboxContainer
+    checkboxContainer.insertBefore(checkbox, document.getElementById("update-checklist"));
+    checkboxContainer.insertBefore(label, document.getElementById("update-checklist"));
+    checkboxContainer.insertBefore(br, document.getElementById("update-checklist"));
 
-    //updates the checkboxes key in localstorage with the current innerhtml of the checkbox container
-    localStorage.setItem("checkboxes", container.innerHTML);
+    //updates the checkboxes key in localstorage with the current innerhtml of the checkbox checkboxContainer
+    localStorage.setItem("checkboxes", checkboxContainer.innerHTML);
 
     checkListEmpty();
 }
@@ -92,7 +93,7 @@ function validate(){
     });
 
     //update localstorage
-    localStorage.setItem("checkboxes", container.innerHTML);
+    localStorage.setItem("checkboxes", checkboxContainer.innerHTML);
     
     checkListEmpty();
 }
