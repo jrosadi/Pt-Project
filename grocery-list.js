@@ -1,7 +1,9 @@
 let checkboxContainer = document.getElementById("checkbox-container");
 let checkboxes = document.getElementsByName("checklist");
 
-//runs on startup
+//purpose: initializes the app and immediately updates the checkboxcontainer and checks if the list is empty
+//input: checkbox container nodelist
+//output: updates current checkbox container as last saved one from localstorage and calls checklistempty function
 function init(){
     //immediately fetches checkboxes from localstorage 
     checkboxContainer.innerHTML = localStorage.getItem("checkboxes");
@@ -12,13 +14,15 @@ function init(){
  
 init();
 
-//get text from form on submit pressed
+//purpose: get form text and add a new checkbox based on the text
+//input: form text
+//output: new checkbox, label, br, and updates the checkboxContainer localstorage
 function formSubmitted(){
     let form = document.getElementById("grocery-input");
     let formText = form.value;
 
-    //check if the form fails(has duplicates or empty space)
-    if(checkFormText(formText)){
+    //check if the form passes(doesn't have duplicates or empty space)
+    if(!checkFormText(formText)){
         return;
     }
 
@@ -49,12 +53,15 @@ function formSubmitted(){
     checkListEmpty();
 }
 
+//purpose: check if the user has inputted valid text
+//input: formText and checkboxes nodelist as an array
+//output: returns false if the user has inputted something invalid and returns true if they haven't
 function checkFormText(formText){
 
     //check if nothing has been put in
     if(formText == ""){
         alert("Please enter a grocery item into the form!"); 
-        return true;
+        return false;
     }
 
     //have to use regular for because foreach can't be broken
@@ -66,13 +73,16 @@ function checkFormText(formText){
 
         if(document.getElementById(element.id + "label").textContent == formText){
             alert("Grocery Item " + formText + " is already included");
-            return true;
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
+//purpose: update checklist based on if the boxes are checked or not
+//input: checkboxes nodelist
+//output: removes checked elements and updates localstorage of the checkboxContainer
 function validate(){        
 
     //loops through all the items in checkboxes and adds the checked ones to checkeditems array
@@ -98,6 +108,9 @@ function validate(){
     checkListEmpty();
 }
 
+// purpose: check if there are no checkboxes and change the state of the grocery list title and button based on that
+//input: checkboxes.length
+//output: change text of grocery list title and button visibility  
 function checkListEmpty(){
     if(checkboxes.length == 0){
         document.getElementById("grocery-list-title").innerHTML = "No Groceries In List";
