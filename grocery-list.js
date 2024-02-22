@@ -8,6 +8,7 @@ function init(){
     //immediately fetches checkboxes from localstorage 
     checkboxContainer.innerHTML = localStorage.getItem("checkboxes");
 
+    console.log( document.getElementById("update-checklist").id);
     //updates the state of the button and title of the checklist based on if it's empty or not
     checkListEmpty();
 }
