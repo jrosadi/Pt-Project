@@ -2,8 +2,6 @@ let checkboxContainer = document.getElementById("checkbox-container");
 let checkboxes = document.getElementsByName("checklist");
 
 let moveToTopFunction = function () {
-    console.log(this.id);
-
     //remove the button part to just get the id of the checkbox
     let checkboxId = this.id.replace("button", "");
 
@@ -60,6 +58,7 @@ function formSubmitted() {
     checkbox.value = "value";
     checkbox.name = "checklist";
 
+    //adds margin left as a class for formatting
     button.classList.add("ml-10");
 
     button.onclick = moveToTopFunction;
